@@ -1,0 +1,10 @@
+- name: create a file
+  file:
+    path: /projects/challenge/fresco_when/tasks/simplefile.txt
+    state: touch
+- name: 'check if file exists'
+  stat: path=/projects/challenge/fresco_when/test/simplefile.txt
+  register: foo_stat
+- name: Move foo to bar
+  command: mv /projects/challenge/fresco_when/tasks/simplefile.txt /projects/challenge/fresco_when/tests/simplefile.txt
+  when: not foo_stat.stat.exists
